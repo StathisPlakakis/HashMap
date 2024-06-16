@@ -1,8 +1,11 @@
 #!/usr/bin/env node
+
+import LinkedList from "./linkedList.js";
+
 class HashMap {
   constructor () {
     let size = 16;
-    this.hashMap = Array(size).fill().map(() => []);
+    this.hashMap = Array(size).fill().map(() => new LinkedList());
   }
 
   hash (key) {
@@ -17,6 +20,8 @@ class HashMap {
 
     return hashCode;
   }
+
+  
 }
 const newHashMap = new HashMap();
-console.log(newHashMap.hash(''))
+console.log(newHashMap.hashMap)
