@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 class HashMap {
-  constuctor () {
-    this.hashMap = []
+  constructor () {
+    this.hashMap = Array(16).fill().map(() => []);
   };
 }
+const newHashMap = new HashMap();
+console.log(newHashMap.hashMap)
