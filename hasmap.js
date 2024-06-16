@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import LinkedList from "./linkedList.js";
+import Node from "./node.js";
 
 class HashMap {
   constructor () {
@@ -25,10 +26,25 @@ class HashMap {
     const index = this.hash(key);
     const bucket = this.hashMap[index];
     if (!bucket.head) {
-      bucket.append([key, value])
+      bucket.append([key, value]);
+      return;
     }
+    let current = bucket.head;
+    while (current) {
+      if (current.value[0] === key) {
+        current.value[1] = value;
+        return;
+      }
+      current = current.nextNode;
+    }
+    bucket.append([key, value]);
   }
 }
+
+
 const newHashMap = new HashMap();
-newHashMap.set('Stathis','Managing Directorrr')
-console.log(newHashMap.hashMap)
+
+
+for (let i = 0; i < newHashMap.hashMap.length; i++) {
+  console.log(newHashMap.hashMap[i].toString())
+}
