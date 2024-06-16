@@ -21,7 +21,14 @@ class HashMap {
     return hashCode;
   }
 
-  
+  set (key, value) {
+    const index = this.hash(key);
+    const bucket = this.hashMap[index];
+    if (!bucket.head) {
+      bucket.append([key, value])
+    }
+  }
 }
 const newHashMap = new HashMap();
+newHashMap.set('Stathis','Managing Directorrr')
 console.log(newHashMap.hashMap)
