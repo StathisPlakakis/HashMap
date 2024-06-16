@@ -53,13 +53,18 @@ class HashMap {
     }
     return null;
   }
+
+  has (key) {
+    const has = this.get(key) ? true : false;
+    return has;
+  }
 }
 
 
 const newHashMap = new HashMap();
-newHashMap.set('Carlos', 'Intern')
-newHashMap.set('Carla', 'Intern')
-newHashMap.set('Carlaaa', 'Assocciate')
+newHashMap.set('Carloski Alcareniz', 'Intern')
+newHashMap.set('Carlaxio Lorentio', 'Intern')
+newHashMap.set('Carlanaz Luerrin', 'Assocciate')
 for (let i = 0; i < newHashMap.hashMap.length; i++) {
   console.log(newHashMap.hashMap[i].toString())
 }
