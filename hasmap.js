@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import LinkedList from "./linkedList.js";
-import Node from "./node.js";
 
 class HashMap {
   constructor () {
@@ -15,8 +14,7 @@ class HashMap {
         
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
-      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % 
-                  newHashMap.hashMap.length;
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.hashMap.length
     }
 
     return hashCode;
@@ -39,12 +37,29 @@ class HashMap {
     }
     bucket.append([key, value]);
   }
+
+  get (key) {
+    const index = this.hash(key);
+    const bucket = this.hashMap[index];
+    if (!bucket.head) {
+      return null;
+    }
+    let current = bucket.head;
+    while (current) {
+      if (current.value[0] === key) {
+        return current.value[1];
+      }
+      current = current.nextNode;
+    }
+    return null;
+  }
 }
 
 
 const newHashMap = new HashMap();
-
-
+newHashMap.set('Carlos', 'Intern')
+newHashMap.set('Carla', 'Intern')
+newHashMap.set('Carlaaa', 'Assocciate')
 for (let i = 0; i < newHashMap.hashMap.length; i++) {
   console.log(newHashMap.hashMap[i].toString())
 }
