@@ -89,6 +89,19 @@ class HashMap {
       bucket.head = null;
     }
   }
+
+  keys () {
+    let totalKeys = [];
+    for (let i = 0; i < this.hashMap.length; i++) {
+      const bucket = this.hashMap[i];
+      let current = bucket.head;
+      while (current) {
+        totalKeys.push(current.value[0])
+        current = current.nextNode;
+      }
+    }
+    return totalKeys;    
+  }
 }
 
 
