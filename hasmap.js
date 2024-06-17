@@ -58,13 +58,25 @@ class HashMap {
     const has = this.get(key) ? true : false;
     return has;
   }
+
+  remove (key) {   
+    if (!this.has(key)) {
+      return false;
+    } else {
+    const index = this.hash(key);
+    const bucket = this.hashMap[index];
+    bucket.removeAtV(key)
+    return true;
+    }
+  }
 }
 
 
 const newHashMap = new HashMap();
-newHashMap.set('Carloski Alcareniz', 'Intern')
-newHashMap.set('Carlaxio Lorentio', 'Intern')
-newHashMap.set('Carlanaz Luerrin', 'Assocciate')
+newHashMap.set('SHAna', 'Intern')
+newHashMap.set('SHAnaaa', 'Manager')
+newHashMap.set('SHAnaaaaa', 'Assocciate')
+newHashMap.remove('SHAnaaaaa')
 for (let i = 0; i < newHashMap.hashMap.length; i++) {
   console.log(newHashMap.hashMap[i].toString())
 }

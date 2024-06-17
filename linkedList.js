@@ -148,7 +148,7 @@ class LinkedList {
     prevNode.nextNode = newNode;
   }
 
-  removeAt (index) {
+  removeAtI (index) {
     if (
       typeof  index !== 'number' ||
       !this.head || 
@@ -171,6 +171,20 @@ class LinkedList {
     }
     prevNode.nextNode = current.nextNode;
   }
+
+  removeAtV (value) {
+    if (this.head.value[0] === value) {
+      this.head = this.head.nextNode;
+      return
+    }
+    let prevNode = null;
+    let current = this.head;   
+    while (current.value[0] !== value) {
+      prevNode = current;
+      current = current.nextNode;
+    }
+    prevNode.nextNode = current.nextNode;
+  }  
 }
 
 export default LinkedList;
