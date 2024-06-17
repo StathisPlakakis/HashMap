@@ -69,6 +69,19 @@ class HashMap {
     return true;
     }
   }
+
+  length () {
+    let totalLength = 0;
+    for (let i = 0; i < this.hashMap.length; i++) {
+      const bucket = this.hashMap[i];
+      let current = bucket.head;
+      while (current) {
+        totalLength += 1;
+        current = current.nextNode;
+      }
+    }
+    return totalLength;
+  }
 }
 
 
@@ -76,7 +89,6 @@ const newHashMap = new HashMap();
 newHashMap.set('SHAna', 'Intern')
 newHashMap.set('SHAnaaa', 'Manager')
 newHashMap.set('SHAnaaaaa', 'Assocciate')
-newHashMap.remove('SHAnaaaaa')
 for (let i = 0; i < newHashMap.hashMap.length; i++) {
   console.log(newHashMap.hashMap[i].toString())
 }
