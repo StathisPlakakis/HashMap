@@ -115,6 +115,19 @@ class HashMap {
     }
     return totalValues;    
   }
+
+  entries () {
+    let totalEntries = [];
+    for (let i = 0; i < this.hashMap.length; i++) {
+      const bucket = this.hashMap[i];
+      let current = bucket.head;
+      while (current) {
+        totalEntries.push(current.value)
+        current = current.nextNode;
+      }
+    }
+    return totalEntries;    
+  }
 }
 
 
@@ -125,4 +138,3 @@ newHashMap.set('SHAnaaaaa', 'Assocciate')
 for (let i = 0; i < newHashMap.hashMap.length; i++) {
   console.log(newHashMap.hashMap[i].toString())
 }
-console.log(newHashMap.values())
