@@ -82,6 +82,13 @@ class HashMap {
     }
     return totalLength;
   }
+
+  clear () {
+    for (let i = 0; i < this.hashMap.length; i++) {
+      const bucket = this.hashMap[i];
+      bucket.head = null;
+    }
+  }
 }
 
 
