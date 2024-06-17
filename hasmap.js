@@ -4,8 +4,9 @@ import LinkedList from "./linkedList.js";
 
 class HashMap {
   constructor () {
-    let size = 16;
-    this.hashMap = Array(size).fill().map(() => new LinkedList());
+    this.size = 16;
+    this.loadFactor = 0.8;
+    this.hashMap = Array(this.size).fill().map(() => new LinkedList());
   }
 
   hash (key) {
@@ -14,13 +15,36 @@ class HashMap {
         
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
-      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.hashMap.length
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.hashMap.length;
     }
 
     return hashCode;
   }
 
   set (key, value) {
+    const currentEntries = this.entries().length;
+    if (this.size * this.loadFactor < currentEntries + 1) {
+      const prevEntries = this.entries();
+      this.size *= 2;
+      this.hashMap = Array(this.size).fill().map(() => new LinkedList());
+      for (let i = 0; i < prevEntries.length; i++) {
+        const index = this.hash(prevEntries[i][0]);
+        const bucket = this.hashMap[index];
+        if (!bucket.head) {
+          bucket.append([prevEntries[i][0], prevEntries[i][1]]);
+          continue;
+        }
+        let current = bucket.head;
+        while (current) {
+          if (current.value[0] === prevEntries[i][0]) {
+            current.value[1] = prevEntries[i][1];
+            continue;
+          }
+          current = current.nextNode;
+        }
+        bucket.append([prevEntries[i][0], prevEntries[i][1]]);
+      }
+    }
     const index = this.hash(key);
     const bucket = this.hashMap[index];
     if (!bucket.head) {
@@ -128,13 +152,4 @@ class HashMap {
     }
     return totalEntries;    
   }
-}
-
-
-const newHashMap = new HashMap();
-newHashMap.set('SHAna', 'Intern')
-newHashMap.set('SHAnaaa', 'Manager')
-newHashMap.set('SHAnaaaaa', 'Assocciate')
-for (let i = 0; i < newHashMap.hashMap.length; i++) {
-  console.log(newHashMap.hashMap[i].toString())
 }
